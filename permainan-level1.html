@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1 - SAKA PUTIK</title>
+    <link rel="stylesheet" href="level.css">
+</head>
+<body>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-container-level">
+        
+        <div class="sidebar-level">
+    <div class="header-level">LEVEL 1</div>
+    <nav class="mission-list">
+        <button id="misi-1" class="mission-item" onclick="pilihMisi(1)">Pola Gambar</button>
+        <button id="misi-2" class="mission-item locked" onclick="pilihMisi(2)">Pindah Titik</button>
+        <button id="misi-3" class="mission-item locked" onclick="pilihMisi(3)">Senilai</button>
+        <button id="misi-4" class="mission-item locked" onclick="pilihMisi(4)">Tebak Nilai</button>
+        <button id="misi-5" class="mission-item locked" onclick="pilihMisi(5)">Tebak Gambar</button>
+        
+        <button id="misi-jumlah" class="mission-item locked" onclick="pilihMisi('jumlah')" style="background: #e67e22 !important; color: white;">Jumlah 2 Kartu</button>
+        
+        <button id="misi-6" class="mission-item locked" onclick="pilihMisi(6)">Misi 1</button>
+        <button id="misi-7" class="mission-item locked" onclick="pilihMisi(7)">Misi 2</button>
+        
+        <button id="misi-hasil" class="mission-item item-hasil-level" onclick="pilihMisi('hasil')">Hasil Belajar</button>
+    </nav>
+</div>
+
+        <div class="play-area">
+            <div class="top-indicator">LEVEL 1</div>
+            
+            <div id="game-content" class="game-content-box">
+                </div>
+        </div>
+
+        <div class="top-right-nav">
+            <button class="nav-icon" id="muteBtn" onclick="toggleMusic()">🔊</button>
+            <button class="nav-icon" onclick="location.href='menu.html'">🏠</button>
+            <button class="nav-icon">📋</button>
+            <button class="nav-icon exit" onclick="location.href='menu.html'">✖</button>
+        </div>
+
+    </div>
+
+    <script src="logic-level.js"></script>
+    <script src="mesin-tahap2.js"></script> ```
+</body>
+</html>

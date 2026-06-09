@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1B - Pindah Titik | SAKA PUTIK</title>
+
+    <!-- WAJIB menggunakan level.css -->
+    <link rel="stylesheet" href="level.css">
+</head>
+<body>
+
+    <!-- ================= AUDIO ================= -->
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ================= CONTAINER UTAMA ================= -->
+
+    <div class="game-container-level">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <div class="sidebar-level">
+
+            <div class="header-level">
+                LEVEL 1
+            </div>
+
+            <nav class="mission-list">
+
+                <button
+                    id="misi-1"
+                    class="mission-item"
+                    onclick="location.href='permainan-level1.html'">
+                    Pola Gambar
+                </button>
+
+                <!-- LEVEL AKTIF -->
+                <button
+                    id="misi-2"
+                    class="mission-item active"
+                    onclick="location.href='permainan-level1b.html'">
+                    Pindah Titik
+                </button>
+
+                <button
+                    id="misi-3"
+                    class="mission-item locked"
+                    onclick="location.href='permainan-level1c.html'">
+                    Senilai
+                </button>
+
+                <button
+                    id="misi-4"
+                    class="mission-item locked">
+                    Tebak Nilai
+                </button>
+
+                <button
+                    id="misi-5"
+                    class="mission-item locked">
+                    Tebak Gambar
+                </button>
+
+                <button
+                    id="misi-6"
+                    class="mission-item locked">
+                    Misi 1
+                </button>
+
+                <button
+                    id="misi-7"
+                    class="mission-item locked">
+                    Misi 2
+                </button>
+
+                <button
+                    id="misi-hasil"
+                    class="mission-item item-hasil-level">
+                    Hasil Belajar
+                </button>
+
+            </nav>
+
+        </div>
+
+        <!-- ================= AREA BERMAIN ================= -->
+
+        <div class="play-area">
+
+            <div class="top-indicator">
+                LEVEL 1
+            </div>
+
+            <!-- KONTEN GAME -->
+            <div id="game-content" class="game-content-box">
+
+                <!-- ================= POPUP ATURAN ================= -->
+
+                <div class="modal-aturan-overlay" id="popupAturan">
+
+                    <div class="modal-aturan-content">
+
+                        <h3>
+                            LEVEL 1B - PINDAH TITIK
+                        </h3>
+
+                        <p>
+                            Pindahkan titik dari kartu kiri menuju kartu kanan.
+                            <br><br>
+                            Susun titik sesuai pola SAKA PUTIK.
+                            <br><br>
+                            Urutan pengisian:
+                            <br>
+                            kiri bawah → kanan bawah → kanan atas → kiri atas → tengah.
+                        </p>
+
+                        <button class="btn-mulai-game" onclick="mulaiLevel1B()">
+                            MULAI
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- ================= AREA GAME ================= -->
+
+                <div class="board-sub-b">
+
+                    <div class="instruction-text">
+                        Pindahkan titik ke pola yang benar.
+                    </div>
+
+                    <div class="cards-container">
+
+                        <!-- KARTU ASAL -->
+                        <div class="kartu-area">
+
+                            <div class="judul-kartu">
+                                Titik Acak
+                            </div>
+
+                            <div id="kartuAsal" class="card-saka besar">
+                                <!-- TITIK ACAK DARI JS -->
+                            </div>
+
+                        </div>
+
+                        <!-- KARTU TUJUAN -->
+                        <div class="kartu-area">
+
+                            <div class="judul-kartu">
+                                Susun Pola
+                            </div>
+
+                            <div id="kartuTujuan" class="card-saka besar target-card">
+                                <!-- SLOT TARGET -->
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= INFO BAWAH ================= -->
+
+                    <div class="panel-bawah-game">
+
+                        <div class="score-box-level">
+                            Skor : <span id="scoreGame">0</span>
+                        </div>
+
+                        <div class="score-box-level">
+                            Soal : <span id="nomorSoal">1</span>/10
+                        </div>
+
+                        <button
+                            id="btnLanjut"
+                            class="btn-next-level"
+                            disabled>
+                            Soal Berikutnya
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= NAVIGASI KANAN ATAS ================= -->
+
+        <div class="top-right-nav">
+
+            <button
+                class="nav-icon"
+                id="muteBtn"
+                onclick="toggleMusic()">
+                🔊
+            </button>
+
+            <button
+                class="nav-icon"
+                onclick="location.href='menu.html'">
+                🏠
+            </button>
+
+            <button class="nav-icon">
+                📋
+            </button>
+
+            <button
+                class="nav-icon exit"
+                onclick="location.href='menu.html'">
+                ✖
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+
+    <script src="logic-level.js"></script>
+
+    <script>
+
+        // =========================================
+        // LEVEL 1B
+        // =========================================
+
+        function mulaiLevel1B(){
+
+            document.getElementById('popupAturan').style.display = 'none';
+
+            pastikanMusikMenyala();
+
+            generateSoalLevel1B();
+        }
+
+        // =========================================
+        // SINKRON STATUS SIDEBAR
+        // =========================================
+
+        updateSidebarLayout();
+
+        // =========================================
+        // AKTIFKAN TOMBOL PINDah TITIK
+        // =========================================
+
+        document.getElementById('misi-2').classList.remove('locked');
+        document.getElementById('misi-2').classList.add('active');
+
+        // =========================================
+        // CONTOH ENGINE AWAL
+        // =========================================
+
+        function generateSoalLevel1B(){
+            console.log('Soal Level 1B dimulai');
+        }
+
+    </script>
+
+</body>
+</html>

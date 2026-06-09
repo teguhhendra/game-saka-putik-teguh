@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang - SAKA PUTIK</title>
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        /* Memastikan container utama menjadi patokan posisi absolut tombol navigasi */
+        .game-container {
+            position: relative;
+        }
+
+        /* Kotak pembungkus pojok kanan atas (Warna abu-abu semi-transparan - Seragam) */
+        .top-right-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.6); 
+            padding: 8px 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mengatur ukuran emoji tombol agar lebih besar dan jelas */
+        .nav-icon {
+            background: none;
+            border: none;
+            font-size: 24px; /* Ukuran besar standar seragam */
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .nav-icon:hover {
+            transform: scale(1.2); /* Efek membesar sedikit saat disentuh kursor */
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-container">
+        
+        <div class="top-right-nav">
+            <button class="nav-icon" id="muteBtn" onclick="toggleMusic()">🔊</button>
+            <button class="nav-icon" onclick="location.href='index.html'">🏠</button>
+            <button class="nav-icon" onclick="location.href='menu.html'">📋</button>
+            <button class="nav-icon exit" onclick="window.close()">✖</button>
+        </div>
+
+        <div class="login-card">
+            <h2>Selamat Datang!</h2>
+            <p>Ayo isi namamu dulu...</p>
+            
+            <div class="login-form">
+                <input type="text" id="inputNama" placeholder="Nama Lengkap">
+                <input type="text" id="inputKelas" placeholder="Kelas">
+                <button class="btn-action" onclick="simpanDanMulai()">MULAI</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="logic-level.js"></script>
+    <script>
+        function simpanDanMulai() {
+    const nama = document.getElementById('inputNama').value.trim();
+    const kelas = document.getElementById('inputKelas').value.trim();
+    
+    if (nama === "" || kelas === "") {
+        alert("Silakan isi nama dan kelas terlebih dahulu ya! 😊");
+        return;
+    }
+    
+    // 1. Ambil nama siswa yang TERAKHIR kali bermain di komputer/laptop ini
+    const namaSiswaTerakhir = localStorage.getItem('namaSiswaTerakhir_Saka') || '';
+
+    // 2. PROSES PENGECEKAN PINTAR (SISTEM AUTO-SAVE BERJEDA HARI)
+    if (namaSiswaTerakhir !== "" && nama.toLowerCase() !== namaSiswaTerakhir.toLowerCase()) {
+        // JIKA GANTI ANAK (Nama baru terdeteksi di laptop yang sama):
+        console.log("Siswa baru terdeteksi. Menyapu bersih data petualangan anak sebelumnya...");
+        
+        // Hapus gembok level dan skor lama milik anak sebelumnya agar tidak bocor
+        localStorage.removeItem('progresMisi_Saka'); 
+        localStorage.removeItem('nilaiAsesmenMisi1_Saka');
+        localStorage.removeItem('skorAsesmenMisi2');
+        
+        // Setel ulang kunci progres baru murni dari Tahap 1
+        localStorage.setItem('progresMisi_Saka', '1');
+    } else {
+        // JIKA ANAK YANG SAMA (Melanjutkan pengerjaan setelah jeda hari):
+        console.log("Anak yang sama kembali masuk. Melanjutkan sisa progres terakhir...");
+        
+        // Jika karena suatu hal progres_Saka kosong, beri nilai dasar 1
+        if (!localStorage.getItem('progresMisi_Saka')) {
+            localStorage.setItem('progresMisi_Saka', '1');
+        }
+    }
+    
+    // 3. Rekam data identitas siswa saat ini ke lokal penyimpanan browser
+    localStorage.setItem('namaSiswa', nama);
+    localStorage.setItem('kelasSiswa', kelas);
+    
+    // Kunci nama anak saat ini sebagai "Siswa Terakhir" untuk pembanding di sesi berikutnya
+    localStorage.setItem('namaSiswaTerakhir_Saka', nama);
+    
+    // 4. Berpindah ke menu utama setelah berhasil lolos verifikasi data
+    location.href = 'menu.html';
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Utama - SAKA PUTIK</title>
+    <link rel="stylesheet" href="menu.css">
+    
+    <style>
+        /* Mengaktifkan koordinat absolut di kontainer game */
+        .game-container {
+            position: relative;
+        }
+
+        /* Kotak pembungkus pojok kanan atas (Warna abu-abu semi-transparan) */
+        .top-right-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.6); /* Warna kotak abu-abu transparan murni */
+            padding: 8px 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mengatur ukuran tombol ikon agar lebih besar dan jelas */
+        .nav-icon {
+            background: none;
+            border: none;
+            font-size: 24px; /* Ukuran emoji dibuat lebih besar sesuai gambar 2 */
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .nav-icon:hover {
+            transform: scale(1.2); /* Efek membesar sedikit saat disentuh kursor */
+        }
+
+        .nav-icon.exit {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-container">
+        
+        <div class="top-right-nav">
+            <button class="nav-icon" id="muteBtn" onclick="toggleMusic()">🔊</button>
+            <button class="nav-icon" onclick="location.href='index.html'">🏠</button>
+            <button class="nav-icon" onclick="location.href='menu.html'">📋</button>
+            <button class="nav-icon exit" onclick="window.close()">✖</button>
+        </div>
+        
+        <div class="sidebar">
+            <div class="user-card">
+                <span id="salam">Halo, Siswa!</span>
+            </div>
+            
+            <nav class="menu-list">
+                <div class="menu-item item-cara" onclick="location.href='cara-bermain.html'">
+                    <span class="icon">❓</span> Cara Main
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level1.html'">
+                    <span class="icon">1️⃣</span> Level 1
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level2.html'">
+                    <span class="icon">2️⃣</span> Level 2
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level3.html'">
+                    <span class="icon">3️⃣</span> Level 3
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level4.html'">
+                    <span class="icon">4️⃣</span> Level 4
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level5.html'">
+                    <span class="icon">5️⃣</span> Level 5
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level6.html'">
+                    <span class="icon">6️⃣</span> Level 6
+                </div>
+                <div class="menu-item item-hasil" onclick="renderRaporKompilasi()">
+                <span class="icon">📊</span> Hasil Belajar
+                </div>
+            </nav>
+
+            <button class="btn-keluar" onclick="location.href='index.html'">KELUAR</button>
+        </div>
+
+        <div class="main-content">
+            <div class="info-display" id="info-display">
+                <h2>Selamat Bermain!</h2>
+                <p>Pilih level di samping untuk memulai petualangan angka.</p>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="logic-level.js"></script>
+    <script>
+        const nama = localStorage.getItem('namaSiswa') || "Siswa";
+        document.getElementById('salam').innerText = "Halo, " + nama + "!";
+
+        function showContent(type) {
+            const display = document.getElementById('info-display');
+            if(type === 'caraMain') {
+                display.innerHTML = `<h2>❓ Cara Main</h2><p>Hitung titik pada kartu dan pilih angka yang tepat!</p>`;
+            } else if(type === 'hasil') {
+                display.innerHTML = `
+                    <h2>📊 Hasil Belajar</h2>
+                    <p>Hebat! Kamu sudah berusaha keras.<br>Selesaikan lebih banyak level untuk melihat skor tertinggimu di sini.</p>
+                    <button class="btn-action" onclick="this.parentElement.style.display='none'" style="margin-top:20px;">TUTUP</button>
+                `;
+            }
+        }
+        </script>
+        <script src="logic-level.js"></script>
+        <script src="rapor-kompilasi.js"></script>
+</body>
+</html>

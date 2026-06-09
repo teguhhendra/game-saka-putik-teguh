@@ -1,0 +1,194 @@
+/* =========================================
+   1. RESET & DASAR
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("background-menu.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+/* =========================================
+   2. SIDEBAR MENU
+   ========================================= */
+.sidebar {
+    width: 350px;
+    height: 90vh;
+    background: rgba(255, 255, 255, 0.7);
+    border: 6px solid #004aad;
+    border-radius: 40px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+.user-card {
+    background: #004aad;
+    color: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-item {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 4px solid transparent;
+    transition: 0.3s;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.1);
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+/* WARNA KHUSUS TOMBOL STANDAR */
+.item-cara { border-color: #ff9800; color: #2dbb22; }
+.item-level { border-color: #ff9800; color: #ff9800; }
+.item-hasil { border-color: #004aad; color: #004aad; }
+
+/* LOGIKA TOMBOL AKTIF (Hanya muncul jika class 'active' ditambah di HTML) */
+.menu-item.active {
+    /* Mengubah isi kotak menjadi hijau */
+    background-color: #2dbb22 !important; 
+    
+    /* Mengubah warna garis agar senada atau lebih gelap sedikit */
+    border-color: #1a7f13 !important; 
+    
+    /* PENTING: Mengubah warna teks menjadi putih agar kontras dengan hijau */
+    color: white !important; 
+    
+    /* Memberikan bayangan agar terlihat menonjol */
+    box-shadow: 0 5px 15px rgba(45, 187, 34, 0.4);
+    transform: scale(1.05);
+}
+
+/* Memastikan icon di dalam tombol aktif juga terlihat bagus */
+.menu-item.active .icon {
+    filter: brightness(0) invert(1); /* Membuat icon jadi putih jika perlu */
+}
+/* Efek Hijau Penuh untuk Tombol yang Aktif (Cara Main, Level 1-6, dll) */
+.menu-item.active {
+    background-color: #2dbb22 !important; /* Isi warna hijau */
+    border-color: #1a7f13 !important;    /* Border hijau gelap */
+    color: white !important;             /* Teks jadi putih agar kontras */
+    transform: scale(1.05);               /* Sedikit membesar */
+    box-shadow: 0 5px 15px rgba(45, 187, 34, 0.4);
+}
+
+/* Memastikan icon di dalam tombol aktif ikut berubah (opsional) */
+.menu-item.active .icon {
+    filter: brightness(0) invert(1); 
+}
+
+.btn-keluar {
+    background: #ff5252;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b71c1c;
+    margin-top: 10px;
+}
+
+.btn-keluar:active { transform: translateY(3px); box-shadow: none; }
+
+/* =========================================
+   3. AREA KONTEN (SEBELAH KANAN)
+   ========================================= */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-end;      
+    padding-bottom: 35px; /* Jarak agar kotak duduk di rumput */
+    margin-right: 350px; /* Penyeimbang lebar sidebar agar kotak di tengah layar */
+    height: 100vh;
+}
+
+.info-display {
+    width: 600px; 
+    height: 65vh; 
+    background: rgba(255, 255, 255, 0.50); /* Opacity 50% sesuai request */
+    padding: 35px;
+    border-radius: 40px; 
+    border: 8px solid #004aad;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    backdrop-filter: blur(5px); /* Efek blur kaca */
+}
+
+.info-display h2 {
+    color: #004aad;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.info-display p {
+    font-size: 20px;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* TOMBOL AKSI DI DALAM KOTAK */
+.btn-action {
+    margin-top: auto; /* Mendorong tombol ke bagian paling bawah kotak */
+    padding: 15px 40px;
+    background: #2dbb22;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #1a7f13;
+    width: 90%;
+    transition: 0.2s;
+    margin-bottom: 10px;
+}
+
+.btn-action:hover { transform: scale(1.05); }
+.btn-action:active { transform: translateY(3px); box-shadow: none; }

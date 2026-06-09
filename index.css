@@ -1,0 +1,94 @@
+/* RESET DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* CONTAINER UTAMA */
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("background.png"); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    /* PENTING: Paksa konten berada di paling bawah */
+    justify-content: flex-end; 
+    align-items: center;
+    /* Jarak kotak dari batas bawah layar (area rumput) */
+    padding-bottom: 50px; 
+}
+
+/* KOTAK DIALOG UTAMA */
+.login-card {
+    background: rgba(255, 255, 255, 0.98);
+    width: 500px !important;
+    padding: 35px !important;
+    border-radius: 40px;
+    border: 8px solid #004aad;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.login-card h2 {
+    font-size: 32px;
+    color: #004aad;
+    margin-bottom: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 15px;
+    border: 3px solid #004aad;
+    font-size: 18px;
+    outline: none;
+}
+
+.btn-action {
+    width: 100%;
+    padding: 18px;
+    background: #2dbb22;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #1a7f13;
+}
+
+/* TOMBOL NAMA DI BAWAH KOTAK */
+.profile-link-bottom {
+    margin-top: 20px;
+    background: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 3px solid #004aad;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* MENGHILANGKAN NAMA DI POJOK (PEMBERSIHAN TOTAL) */
+.profile-link, .profile-btn, .author-name-top, #author-top {
+    display: none !important;
+    visibility: hidden !important;
+}

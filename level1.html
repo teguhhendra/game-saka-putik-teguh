@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1 - SAKA PUTIK</title>
+    <link rel="stylesheet" href="menu.css">
+    <style>
+        /* Memastikan container utama menjadi patokan posisi absolut tombol */
+        .game-container {
+            position: relative;
+        }
+
+        .level-intro-card {
+            width: 700px;
+            background: rgba(44, 62, 80, 0.9);
+            padding: 40px;
+            border-radius: 50px;
+            border: 4px solid #1a2a3a;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .level-intro-card h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .level-intro-card p {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .btn-start-level {
+            margin-top: 30px;
+            padding: 15px 60px;
+            background: #416127;
+            color: white;
+            border: 3px solid #ffffff;
+            border-radius: 15px;
+            font-size: 28px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 0 #2d451a;
+        }
+
+        .btn-start-level:hover {
+            transform: scale(1.05);
+            background: #4d732e;
+        }
+
+        .btn-start-level:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* ========================================================
+           KODE BARU: MENYURUTKAN TOMBOL KE POJOK KANAN ATAS (GAMBAR 2)
+           ======================================================== */
+        .top-right-nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.6); /* Kotak abu-abu transparan murni */
+            padding: 8px 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mengatur ukuran emoji tombol agar lebih besar dan jelas */
+        .nav-icon {
+            background: none;
+            border: none;
+            font-size: 24px; /* Ukuran emoji besar sesuai Gambar 2 */
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .nav-icon:hover {
+            transform: scale(1.2); /* Efek membesar tipis saat didekati mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-container">
+        
+        <div class="top-right-nav">
+    <button class="nav-icon" id="muteBtn" onclick="toggleMusic()">🔊</button>
+    <button class="nav-icon" onclick="location.href='index.html'">🏠</button>
+    <button class="nav-icon" onclick="location.href='menu.html'">📋</button>
+    <button class="nav-icon exit" onclick="window.close()">✖</button>
+</div>
+        <div class="sidebar">
+            <div class="user-card">
+                <span id="salam">Halo, Siswa!</span>
+            </div>
+            
+            <nav class="menu-list">
+                <div class="menu-item item-cara" onclick="location.href='cara-bermain.html'">
+                    <span class="icon">❓</span> Cara Main
+                </div>
+                <div class="menu-item item-level active" onclick="location.href='level1.html'">
+                    <span class="icon">1️⃣</span> Level 1
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level2.html'">
+                    <span class="icon">2️⃣</span> Level 2
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level3.html'">
+                    <span class="icon">3️⃣</span> Level 3
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level4.html'">
+                    <span class="icon">4️⃣</span> Level 4
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level5.html'">
+                    <span class="icon">5️⃣</span> Level 5
+                </div>
+                <div class="menu-item item-level" onclick="location.href='level6.html'">
+                    <span class="icon">6️⃣</span> Level 6
+                </div>
+                <div class="menu-item item-hasil" onclick="location.href='hasil.html'">
+                    <span class="icon">📊</span> Hasil Belajar
+                </div>
+            </nav>
+
+            <button class="btn-keluar" onclick="location.href='index.html'">KELUAR</button>
+        </div>
+
+        <div class="main-content">
+            <div class="level-intro-card">
+                <h1>Level 1</h1>
+                <p>Di level ini kita akan belajar mengenali pola bilangan 1 sampai 10. Di level ini juga kita akan mencoba menentukan nilai bilangan sesuai pola gambar.</p>
+                <p>Siap untuk mencoba?</p>
+                <p>Klik tombol mulai yang berwarna hijau!</p>
+
+                <button class="btn-start-level" onclick="location.href='permainan-level1.html'">
+                    Mulai level 1
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="logic-level.js"></script>
+    <script>
+        const nama = localStorage.getItem('namaSiswa') || "Siswa";
+        document.getElementById('salam').innerText = "Halo, " + nama + "!";
+    </script>
+</body>
+</html>
